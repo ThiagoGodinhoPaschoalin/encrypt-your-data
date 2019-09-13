@@ -50,7 +50,6 @@ namespace EYD.ConsoleExecute
             {
                 Console.WriteLine("FALHA");
             }
-
         }
 
         private static void GetFilePath()

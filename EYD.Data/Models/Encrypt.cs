@@ -12,8 +12,7 @@ namespace EYD.Data.Models
         {
             try
             {
-                var byteFile = File.ReadAllBytes(pathFile);
-                return Convert.ToBase64String(byteFile);
+                return Utils.Read(pathFile);
             }
             catch(Exception ex)
             {
@@ -60,9 +59,10 @@ namespace EYD.Data.Models
             {
                 var directory = Path.GetDirectoryName(pathFile);
                 var fileName = Path.GetFileName(pathFile);
-
                 string path = Path.Combine(directory, string.Concat(fileName, Constants.Extension));
-                File.WriteAllText(path, content);
+
+                Utils.Save(path, content);
+
                 return true;
             }
             catch(Exception ex)

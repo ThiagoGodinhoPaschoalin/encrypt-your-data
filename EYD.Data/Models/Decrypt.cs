@@ -12,7 +12,7 @@ namespace EYD.Data.Models
         {
             try
             {
-                return File.ReadAllText(pathFile);
+                return Utils.Read(pathFile);
             }
             catch(Exception ex)
             {
@@ -54,12 +54,11 @@ namespace EYD.Data.Models
         {
             try
             {
-                content = Encoding.UTF8.GetString(Convert.FromBase64String(content));
                 var directory = Path.GetDirectoryName(pathFile);
                 var fileName = Path.GetFileName(pathFile).Replace(Constants.Extension, "");
-
                 string path = Path.Combine(directory, fileName);
-                File.WriteAllText(path, content);
+
+                Utils.Save(path, content);
 
                 return true;
             }

@@ -46,5 +46,26 @@ namespace EYD.Data
                 throw new InvalidOperationException($"Exception in 'Hash' with text '{text}'.", ex);
             }
         }
+
+        public static string Read(string pathFile)
+        {
+            using (FileStream fs = new FileStream(pathFile, FileMode.Open, FileAccess.Read))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    fs.CopyTo(ms);
+                    return Convert.ToBase64String(ms.ToArray());
+                }
+            }
+        }
+
+        public static void Save(string pathFile, string content)
+        {
+            using (FileStream fs = new FileStream(pathFile, FileMode.CreateNew, FileAccess.Write))
+            {
+                var DecryptBytes = Convert.FromBase64String(content);
+                fs.Write(DecryptBytes, 0, DecryptBytes.Length);
+            }
+        }
     }
 }
